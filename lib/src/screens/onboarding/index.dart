@@ -1,7 +1,10 @@
+import 'package:app/src/controllers/splash_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class Onboarding extends StatelessWidget {
-  const Onboarding({Key? key}) : super(key: key);
+class SplashScreen extends StatelessWidget {
+  SplashScreen({Key? key}) : super(key: key);
+  final SplashController _controller = Get.put(SplashController());
 
   @override
   Widget build(BuildContext context) {
@@ -37,19 +40,22 @@ class Onboarding extends StatelessWidget {
               Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    Text(
+                  children: [
+                    const Text(
                       'Chedda',
                       style: TextStyle(
                         fontWeight: FontWeight.normal,
-                        fontSize: 60,
+                        fontSize: 40,
                         color: Colors.white,
                       ),
                     ),
-                    SizedBox(height: 20),
-                    CircularProgressIndicator.adaptive(
-                      valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                    )
+                    SizedBox(height: size.height * 0.05),
+                    (_controller.isLoading.isTrue)
+                    ? const CircularProgressIndicator.adaptive(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      )
+                    : const SizedBox.shrink(),
                   ],
                 ),
               ),
